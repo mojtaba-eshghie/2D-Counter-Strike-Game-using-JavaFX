@@ -197,7 +197,7 @@
     <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="17" fx:id="rec8_17"/>
     <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="18" fx:id="rec8_18"/>
 
-    <ImageView GridPane.rowIndex="4" GridPane.columnIndex="5">
+    <ImageView GridPane.rowIndex="4" GridPane.columnIndex="4">
         <Image url="@/sample/blue-tri.png"/>
     </ImageView>
 
