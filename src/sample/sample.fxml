@@ -1,0 +1,210 @@
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<GridPane fx:controller="sample.Controller"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="5" vgap="5">
+
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="0"  fx:id="rec0_0" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="1"  fx:id="rec0_1" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="2"  fx:id="rec0_2" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="3"  fx:id="rec0_3" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="4"  fx:id="rec0_4" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="5"  fx:id="rec0_5" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="6"  fx:id="rec0_6" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="7"  fx:id="rec0_7" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="8"  fx:id="rec0_8" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="9"  fx:id="rec0_9" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="10"  fx:id="rec0_10" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="11"  fx:id="rec0_11" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="12"  fx:id="rec0_12" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="13"  fx:id="rec0_13" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="14"  fx:id="rec0_14" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="15"  fx:id="rec0_15" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="16"  fx:id="rec0_16" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="17" fx:id="rec0_17" />
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="18" fx:id="rec0_18" />
+
+
+
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="1" GridPane.columnIndex="0" fx:id="rec1_0" />
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="1" fx:id="rec1_1"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="2" fx:id="rec1_2"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="3" fx:id="rec1_3"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="4" fx:id="rec1_4"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="5" fx:id="rec1_5"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="6" fx:id="rec1_6"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="7" fx:id="rec1_7"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="8" fx:id="rec1_8"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="9" fx:id="rec1_9"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="10" fx:id="rec1_10"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="11" fx:id="rec1_11"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="12" fx:id="rec1_12"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="13" fx:id="rec1_13"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="14" fx:id="rec1_14"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="15" fx:id="rec1_15"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="16" fx:id="rec1_16"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="1" GridPane.columnIndex="17" fx:id="rec1_17"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="1" GridPane.columnIndex="18" fx:id="rec1_18"/>
+
+
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="2" GridPane.columnIndex="0" fx:id="rec2_0"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="1" fx:id="rec2_1"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="2" fx:id="rec2_2"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="3" fx:id="rec2_3"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="4" fx:id="rec2_4"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="5" fx:id="rec2_5"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="6" fx:id="rec2_6"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="7" fx:id="rec2_7"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="8" fx:id="rec2_8"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="9" fx:id="rec2_9"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="10" fx:id="rec2_10"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="11" fx:id="rec2_11"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="12" fx:id="rec2_12"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="13" fx:id="rec2_13"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="14" fx:id="rec2_14"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="15" fx:id="rec2_15"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="16" fx:id="rec2_16"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="2" GridPane.columnIndex="17" fx:id="rec2_17"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="2" GridPane.columnIndex="18" fx:id="rec2_18"/>
+
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="3" GridPane.columnIndex="0" fx:id="rec3_0"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="1" fx:id="rec3_1"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="2" fx:id="rec3_2"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="3" fx:id="rec3_3"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="4" fx:id="rec3_4"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="5" fx:id="rec3_5"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="6" fx:id="rec3_6"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="7" fx:id="rec3_7"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="8" fx:id="rec3_8"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="9" fx:id="rec3_9"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="10" fx:id="rec3_10"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="11" fx:id="rec3_11"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="12" fx:id="rec3_12"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="13" fx:id="rec3_13"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="14" fx:id="rec3_14"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="15" fx:id="rec3_15"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="16" fx:id="rec3_16"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="3" GridPane.columnIndex="17" fx:id="rec3_17"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="3" GridPane.columnIndex="18" fx:id="rec3_18"/>
+
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="4" GridPane.columnIndex="0" fx:id="rec4_0"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="1" fx:id="rec4_1"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="2" fx:id="rec4_2"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="3" fx:id="rec4_3"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="4" fx:id="rec4_4"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="5" fx:id="rec4_5"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="6" fx:id="rec4_6"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="7" fx:id="rec4_7"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="8" fx:id="rec4_8"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="9" fx:id="rec4_9"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="10" fx:id="rec4_10"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="11" fx:id="rec4_11"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="12" fx:id="rec4_12"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="13" fx:id="rec4_13"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="14" fx:id="rec4_14"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="15" fx:id="rec4_15"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="16" fx:id="rec4_16"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="4" GridPane.columnIndex="17" fx:id="rec4_17"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="4" GridPane.columnIndex="18" fx:id="rec4_18"/>
+
+
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="5" GridPane.columnIndex="0" fx:id="rec5_0"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="1" fx:id="rec5_1"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="2" fx:id="rec5_2"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="3" fx:id="rec5_3"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="4" fx:id="rec5_4"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="5" fx:id="rec5_5"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="6" fx:id="rec5_6"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="7" fx:id="rec5_7"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="8" fx:id="rec5_8"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="9" fx:id="rec5_9"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="10" fx:id="rec5_10"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="11" fx:id="rec5_11"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="12" fx:id="rec5_12"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="13" fx:id="rec5_13"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="14" fx:id="rec5_14"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="15" fx:id="rec5_15"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="16" fx:id="rec5_16"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="5" GridPane.columnIndex="17" fx:id="rec5_17"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="5" GridPane.columnIndex="18" fx:id="rec5_18"/>
+
+
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="6" GridPane.columnIndex="0" fx:id="rec6_0"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="1" fx:id="rec6_1"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="2" fx:id="rec6_2"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="3" fx:id="rec6_3"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="4" fx:id="rec6_4"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="5" fx:id="rec6_5"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="6" fx:id="rec6_6"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="7" fx:id="rec6_7"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="8" fx:id="rec6_8"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="9" fx:id="rec6_9"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="10" fx:id="rec6_10"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="11" fx:id="rec6_11"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="12" fx:id="rec6_12"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="13" fx:id="rec6_13"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="14" fx:id="rec6_14"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="15" fx:id="rec6_15"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="16" fx:id="rec6_16"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="6" GridPane.columnIndex="17" fx:id="rec6_17"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="6" GridPane.columnIndex="18" fx:id="rec6_18"/>
+
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="7" GridPane.columnIndex="0" fx:id="rec7_0"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="1" fx:id="rec7_1"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="2" fx:id="rec7_2"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="3" fx:id="rec7_3"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="4" fx:id="rec7_4"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="5" fx:id="rec7_5"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="6" fx:id="rec7_6"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="7" fx:id="rec7_7"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="8" fx:id="rec7_8"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="9" fx:id="rec7_9"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="10" fx:id="rec7_10"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="11" fx:id="rec7_11"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="12" fx:id="rec7_12"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="13" fx:id="rec7_13"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="14" fx:id="rec7_14"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="15" fx:id="rec7_15"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="16" fx:id="rec7_16"/>
+    <Rectangle width="40" height="40" fill="peru" GridPane.rowIndex="7" GridPane.columnIndex="17" fx:id="rec7_17"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="7" GridPane.columnIndex="18" fx:id="rec7_18"/>
+
+
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="0" fx:id="rec8_0"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="1" fx:id="rec8_1"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="2" fx:id="rec8_2"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="3" fx:id="rec8_3"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="4" fx:id="rec8_4"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="5" fx:id="rec8_5"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="6" fx:id="rec8_6"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="7" fx:id="rec8_7"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="8" fx:id="rec8_8"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="9" fx:id="rec8_9"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="10" fx:id="rec8_10"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="11" fx:id="rec8_11"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="12" fx:id="rec8_12"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="13" fx:id="rec8_13"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="14" fx:id="rec8_14"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="15" fx:id="rec8_15"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="16" fx:id="rec8_16"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="17" fx:id="rec8_17"/>
+    <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="18" fx:id="rec8_18"/>
+
+    <ImageView GridPane.rowIndex="4" GridPane.columnIndex="5">
+        <Image url="@/sample/blue-tri.png"/>
+    </ImageView>
+
+    <ImageView GridPane.rowIndex="3" GridPane.columnIndex="5">
+        <Image url="@/sample/red-tri.png"/>
+    </ImageView>
+
+    <Circle fill="greenyellow" radius="15" GridPane.rowIndex="0" GridPane.columnIndex="0" GridPane.halignment="CENTER"/>
+
+</GridPane>
