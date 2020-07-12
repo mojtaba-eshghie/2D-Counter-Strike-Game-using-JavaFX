@@ -15,14 +15,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.lang.reflect.Array;
 import java.security.Key;
 import java.util.*;
+
 
 public class Main extends Application {
     public Integer[] chosen = new Integer[22];
@@ -51,6 +55,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Hello World");
@@ -319,6 +324,18 @@ public class Main extends Application {
         return walls;
     }
 
+    public void rotatePlayer(ImageView player, String direction) {
+        if (direction.equals("right")){
+            player.setRotate(90.0);
+        } else if (direction.equals("left")) {
+            player.setRotate(270.0);
+        } else if (direction.equals("up")) {
+            player.setRotate(0.0);
+        } else if (direction.equals("down")) {
+            player.setRotate(180.0);
+        }
+    }
+
     public void step(KeyEvent event) {
         Integer playerPositionIndex = (19 * this.player_current_pos_row) + this.player_current_pos_column + 1;
 
@@ -330,47 +347,80 @@ public class Main extends Application {
 
 
         if (event.getCode() == KeyCode.RIGHT) {
+
+            this.rotatePlayer(this.bluePlayer, "right");
+
+
+
+
+            System.out.println(this.bluePlayer.rotateProperty().floatValue());
+
             System.out.println(event.getCode());
             if (emptySpace.contains(playerPositionIndex + 1)) {
+                this.playCorrectMoveBeep();
                 System.out.println("right is: " + Integer.toString(playerPositionIndex + 1));
                 System.out.println("Can go right!!!");
                 this.player_current_pos_column = this.player_current_pos_column  + 1;
                 GridPane.setColumnIndex(this.bluePlayer, this.player_current_pos_column);
 
             } else {
+                this.playWrongMoveBeep();
                 System.out.println("Cannot move to right...");
+
             }
         } else if (event.getCode() == KeyCode.LEFT) {
+            this.rotatePlayer(this.bluePlayer, "left");
             System.out.println(event.getCode());
             if (emptySpace.contains(playerPositionIndex - 1)) {
+                this.playCorrectMoveBeep();
                 System.out.println("Can go left!!!");
                 this.player_current_pos_column = this.player_current_pos_column - 1;
                 GridPane.setColumnIndex(this.bluePlayer, this.player_current_pos_column);
             } else {
+                this.playWrongMoveBeep();
                 System.out.println("Cannot move to left...");
             }
 
         } else if (event.getCode() == KeyCode.DOWN) {
+            this.rotatePlayer(this.bluePlayer, "down");
             System.out.println(event.getCode());
             if (emptySpace.contains(playerPositionIndex + 19)) {
+                this.playCorrectMoveBeep();
                 System.out.println("Can go down!!!");
                 this.player_current_pos_row = this.player_current_pos_row + 1;
                 GridPane.setRowIndex(this.bluePlayer, this.player_current_pos_row);
             } else {
+                this.playWrongMoveBeep();
                 System.out.println("Cannot move to down...");
             }
 
         } else if (event.getCode() == KeyCode.UP) {
+            this.rotatePlayer(this.bluePlayer, "up");
             System.out.println(event.getCode());
             if (emptySpace.contains(playerPositionIndex - 19)) {
+                this.playCorrectMoveBeep();
                 System.out.println("Can go up!!!");
                 this.player_current_pos_row = this.player_current_pos_row  - 1;
                 GridPane.setRowIndex(this.bluePlayer, this.player_current_pos_row);
             } else {
+                this.playWrongMoveBeep();
                 System.out.println("Cannot move to up...");
+
             }
 
         }
+    }
+
+    public void playWrongMoveBeep(){
+        Media hit = new Media(new File("src/sample/beep-03.wav").toURI().toString());
+        MediaPlayer player = new MediaPlayer(hit);
+        player.play();
+    }
+
+    public void playCorrectMoveBeep() {
+        Media hit = new Media(new File("src/sample/button-3.wav").toURI().toString());
+        MediaPlayer player = new MediaPlayer(hit);
+        player.play();
     }
 
     public static void main(String[] args) {
