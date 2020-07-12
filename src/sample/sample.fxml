@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <GridPane fx:controller="sample.Controller"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="5" vgap="5">
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="5" vgap="5" fx:id="grdpn">
 
     <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="0"  fx:id="rec0_0" />
     <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="0" GridPane.columnIndex="1"  fx:id="rec0_1" />
@@ -197,7 +197,7 @@
     <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="17" fx:id="rec8_17"/>
     <Rectangle width="40" height="40" fill="saddlebrown" GridPane.rowIndex="8" GridPane.columnIndex="18" fx:id="rec8_18"/>
 
-    <ImageView GridPane.rowIndex="4" GridPane.columnIndex="4">
+    <ImageView GridPane.rowIndex="4" GridPane.columnIndex="4" fx:id="blueplayer">
         <Image url="@/sample/blue-tri.png"/>
     </ImageView>
 

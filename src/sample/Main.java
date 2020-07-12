@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.cell.CheckBoxListCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -23,6 +25,29 @@ import java.security.Key;
 import java.util.*;
 
 public class Main extends Application {
+    public Integer[] chosen = new Integer[22];
+    public Integer player_current_pos_row;
+    public Integer player_current_pos_column;
+    public ArrayList<Integer> emptySpace = new ArrayList<>();
+    public ImageView bluePlayer;
+
+
+    public void setEmptySpace() {
+        for (int row = 1; row < 8; row++) {
+
+            for (int col = 1; col < 18; col++) {
+                if (Arrays.asList(this.chosen).contains(row*19 + col + 1)) {
+                    // do nothing
+                } else {
+                    // add to emptySpace
+                    this.emptySpace.add(row*19 + col + 1);
+                }
+            }
+        }
+        System.out.println("********");
+        System.out.println(this.emptySpace);
+        System.out.println("********");
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -45,6 +70,9 @@ public class Main extends Application {
                 rectangles[row][col] = (Rectangle) root.lookup("#rec" + Integer.toString(row) + "_" + Integer.toString(col));
             }
         }
+
+        this.bluePlayer = (ImageView) root.lookup("#blueplayer");
+
 
         // Now, this is how to address the controller:
         // rectangles[8][18].setFill(Color.BLACK);
@@ -77,12 +105,14 @@ public class Main extends Application {
 
 
 
+        this.player_current_pos_column = 4;
+        this.player_current_pos_row = 4;
 
         Scene scene = new Scene(root, 860, 420);
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             // This will get the code for key pressed event.
-            System.out.println(e.getCode());
+
             step(e);
         });
 
@@ -92,7 +122,7 @@ public class Main extends Application {
     }
 
     public ArrayList<Rectangle> chooseWalls(Rectangle[][] rectangles) {
-        Integer[] chosen = new Integer[57];
+        Integer[] chosen = new Integer[22];
         /*
         Skipping randomness for now!
         int goOn = 1;
@@ -112,14 +142,16 @@ public class Main extends Application {
          */
 
 
-        for (int i = 0; i < 57; i++) {
-            chosen[i] = 129;
-        }
+
         chosen[0] = 21; chosen[1] = 40; chosen[2] = 59; chosen[3] = 42; chosen[4] = 61; chosen[5] = 80; chosen[6] = 82; chosen[7] = 101; chosen[8] = 120; chosen[9] = 93; chosen[10] = 92; chosen[11] = 73; chosen[12] = 54; chosen[13] = 47; chosen[14] = 66; chosen[15] = 68; chosen[16] = 87; chosen[17] = 67; chosen[18] = 129; chosen[19] = 148; chosen[18] = 124; chosen[19] = 131; chosen[20] = 145; chosen[21] = 117;
-        System.out.println(Arrays.toString(chosen));
+
+        this.chosen = chosen;
+        System.out.println(Arrays.toString(this.chosen));
+
+        setEmptySpace();
 
         ArrayList<Rectangle> walls = new ArrayList<>();
-        for (int i = 0; i < 57; i++) {
+        for (int i = 0; i < chosen.length; i++) {
             int tile_index = chosen[i];
             int tile_row = (tile_index / 19);
             int tile_column = (tile_index % 19);
@@ -288,14 +320,55 @@ public class Main extends Application {
     }
 
     public void step(KeyEvent event) {
+        Integer playerPositionIndex = (19 * this.player_current_pos_row) + this.player_current_pos_column + 1;
+
+        System.out.println("*************************************************************************");
+        System.out.println("emptySpace: ");
+        System.out.println(this.emptySpace);
+        System.out.println(Arrays.toString(this.chosen));
+        System.out.println(playerPositionIndex);
+
 
         if (event.getCode() == KeyCode.RIGHT) {
-            
+            System.out.println(event.getCode());
+            if (emptySpace.contains(playerPositionIndex + 1)) {
+                System.out.println("right is: " + Integer.toString(playerPositionIndex + 1));
+                System.out.println("Can go right!!!");
+                this.player_current_pos_column = this.player_current_pos_column  + 1;
+                GridPane.setColumnIndex(this.bluePlayer, this.player_current_pos_column);
+
+            } else {
+                System.out.println("Cannot move to right...");
+            }
         } else if (event.getCode() == KeyCode.LEFT) {
+            System.out.println(event.getCode());
+            if (emptySpace.contains(playerPositionIndex - 1)) {
+                System.out.println("Can go left!!!");
+                this.player_current_pos_column = this.player_current_pos_column - 1;
+                GridPane.setColumnIndex(this.bluePlayer, this.player_current_pos_column);
+            } else {
+                System.out.println("Cannot move to left...");
+            }
 
         } else if (event.getCode() == KeyCode.DOWN) {
+            System.out.println(event.getCode());
+            if (emptySpace.contains(playerPositionIndex + 19)) {
+                System.out.println("Can go down!!!");
+                this.player_current_pos_row = this.player_current_pos_row + 1;
+                GridPane.setRowIndex(this.bluePlayer, this.player_current_pos_row);
+            } else {
+                System.out.println("Cannot move to down...");
+            }
 
         } else if (event.getCode() == KeyCode.UP) {
+            System.out.println(event.getCode());
+            if (emptySpace.contains(playerPositionIndex - 19)) {
+                System.out.println("Can go up!!!");
+                this.player_current_pos_row = this.player_current_pos_row  - 1;
+                GridPane.setRowIndex(this.bluePlayer, this.player_current_pos_row);
+            } else {
+                System.out.println("Cannot move to up...");
+            }
 
         }
     }
