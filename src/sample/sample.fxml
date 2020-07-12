@@ -201,7 +201,16 @@
         <Image url="@/sample/blue-tri.png"/>
     </ImageView>
 
-    <ImageView GridPane.rowIndex="3" GridPane.columnIndex="5">
+    <ImageView GridPane.rowIndex="1" GridPane.columnIndex="17" fx:id="redPlayer1">
+        <Image url="@/sample/red-tri.png"/>
+    </ImageView>
+
+
+    <ImageView GridPane.rowIndex="1" GridPane.columnIndex="16" fx:id="redPlayer2">
+        <Image url="@/sample/red-tri.png"/>
+    </ImageView>
+
+    <ImageView GridPane.rowIndex="2" GridPane.columnIndex="17" fx:id="redPlayer3">
         <Image url="@/sample/red-tri.png"/>
     </ImageView>
 

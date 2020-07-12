@@ -35,6 +35,24 @@ public class Main extends Application {
     public ArrayList<Integer> emptySpace = new ArrayList<>();
     public ImageView bluePlayer;
 
+    public Integer red_player_one_row;
+    public Integer red_player_one_col;
+
+    public Integer red_player_two_row;
+    public Integer red_player_two_col;
+
+    public Integer red_player_three_row;
+    public Integer red_player_three_col;
+
+    public int red_player_three_lives;
+    public int red_player_two_lives;
+    public int red_player_one_lives;
+    public int blue_player_lives;
+
+    public ImageView redPlayer1;
+    public ImageView redPlayer2;
+    public ImageView redPlayer3;
+
 
     public void setEmptySpace() {
         for (int row = 1; row < 8; row++) {
@@ -55,6 +73,20 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        this.red_player_three_lives = 3;
+        this.red_player_two_lives = 3;
+        this.red_player_one_lives = 3;
+        this.blue_player_lives = 3;
+
+        this.red_player_one_col = 17;
+        this.red_player_one_row = 1;
+
+        this.red_player_two_col = 16;
+        this.red_player_two_row = 1;
+
+        this.red_player_three_col = 17;
+        this.red_player_three_row = 2;
+
 
 
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -64,6 +96,10 @@ public class Main extends Application {
         // This is how we address a controller from the fxml file that it was defined in it
         //Rectangle rec00 = (Rectangle) root.lookup("#rec5_8");
         //rec00.setFill(Color.BLUE);
+
+        this.redPlayer1 = (ImageView) root.lookup("#redPlayer1");
+        this.redPlayer2 = (ImageView) root.lookup("#redPlayer2");
+        this.redPlayer3 = (ImageView) root.lookup("#redPlayer3");
 
         // Let us store all of the rectangle objects inside a Rectangle array
         Rectangle[][] rectangles = new Rectangle[9][19];
@@ -117,8 +153,12 @@ public class Main extends Application {
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             // This will get the code for key pressed event.
+            if (e.getCode() == KeyCode.SPACE) {
+                this.blueShoots();
+            } else {
+                step(e);
+            }
 
-            step(e);
         });
 
         primaryStage.setScene(scene);
@@ -362,7 +402,7 @@ public class Main extends Application {
                 System.out.println("Can go right!!!");
                 this.player_current_pos_column = this.player_current_pos_column  + 1;
                 GridPane.setColumnIndex(this.bluePlayer, this.player_current_pos_column);
-
+                this.updateEmptySpace();
             } else {
                 this.playWrongMoveBeep();
                 System.out.println("Cannot move to right...");
@@ -376,6 +416,7 @@ public class Main extends Application {
                 System.out.println("Can go left!!!");
                 this.player_current_pos_column = this.player_current_pos_column - 1;
                 GridPane.setColumnIndex(this.bluePlayer, this.player_current_pos_column);
+                this.updateEmptySpace();
             } else {
                 this.playWrongMoveBeep();
                 System.out.println("Cannot move to left...");
@@ -389,6 +430,7 @@ public class Main extends Application {
                 System.out.println("Can go down!!!");
                 this.player_current_pos_row = this.player_current_pos_row + 1;
                 GridPane.setRowIndex(this.bluePlayer, this.player_current_pos_row);
+                this.updateEmptySpace();
             } else {
                 this.playWrongMoveBeep();
                 System.out.println("Cannot move to down...");
@@ -402,6 +444,7 @@ public class Main extends Application {
                 System.out.println("Can go up!!!");
                 this.player_current_pos_row = this.player_current_pos_row  - 1;
                 GridPane.setRowIndex(this.bluePlayer, this.player_current_pos_row);
+                this.updateEmptySpace();
             } else {
                 this.playWrongMoveBeep();
                 System.out.println("Cannot move to up...");
@@ -411,6 +454,8 @@ public class Main extends Application {
         }
     }
 
+
+
     public void playWrongMoveBeep(){
         Media hit = new Media(new File("src/sample/beep-03.wav").toURI().toString());
         MediaPlayer player = new MediaPlayer(hit);
@@ -419,6 +464,185 @@ public class Main extends Application {
 
     public void playCorrectMoveBeep() {
         Media hit = new Media(new File("src/sample/button-3.wav").toURI().toString());
+        MediaPlayer player = new MediaPlayer(hit);
+        player.play();
+    }
+
+    public void updateEmptySpace() {
+        /*
+        // Update the emptySpace based on the current position of all of players so that
+        // it will not include their positions
+        this.emptySpace = new ArrayList<Integer>();
+        for (int j = 1; j < 172; j++) {
+            if ((j > 18) && (j != 19) && (j != 38) && (j != 57) && (j != 76) && (j != 95) && (j != 114) && (j != 133) && (j < 152) && (j != 37) && (j != 56) && (j != 75) && (j != 94) && (j != 113) && (j != 132) && (j != 151)) {
+                this.emptySpace.add(j);
+            }
+
+        }
+
+
+        for (int i = 0; i < this.chosen.length; i++) {
+            int place = this.chosen[i];
+            int exists = this.emptySpace.indexOf(place);
+            if (exists != -1) {
+                this.emptySpace.remove(exists);
+            }
+        }
+
+
+
+        Integer bluePlayerPosition = (this.player_current_pos_row * 19) + this.red_player_three_col - 13;
+        Integer redPlayerOnePosition = (this.red_player_one_row * 19) + this.red_player_one_col;
+        Integer redPlayerTwoPosition = (this.red_player_two_row * 19) + this.red_player_two_col;
+        Integer redPlayerThreePosition = (this.red_player_three_row * 19) + this.red_player_three_col;
+
+        System.out.println("    #### blue's new position is: " + Integer.toString(bluePlayerPosition) + " #### (" + Integer.toString(this.player_current_pos_row) + ", " + Integer.toString(this.player_current_pos_column) + ") ");
+
+        int exists = this.emptySpace.indexOf(bluePlayerPosition);
+        if (exists != -1) {
+            System.out.println(Integer.toString(bluePlayerPosition) + " removed from emptySpace::: it was in " + this.emptySpace.indexOf(bluePlayerPosition));
+            this.emptySpace.remove(exists);
+        }
+
+        exists = this.emptySpace.indexOf(redPlayerOnePosition);
+        if (exists != -1) {
+            System.out.println(Integer.toString(redPlayerOnePosition) + " removed from emptySpace::: it was in " + this.emptySpace.indexOf(redPlayerOnePosition));
+            this.emptySpace.remove(exists);
+        }
+
+        exists = this.emptySpace.indexOf(redPlayerTwoPosition);
+        if (exists != -1) {
+            System.out.println(Integer.toString(redPlayerTwoPosition) + " removed from emptySpace::: it was in " + this.emptySpace.indexOf(redPlayerTwoPosition));
+            this.emptySpace.remove(exists);
+
+        }
+
+        exists = this.emptySpace.indexOf(redPlayerThreePosition);
+        if (exists != -1) {
+            System.out.println(Integer.toString(redPlayerThreePosition) + " removed from emptySpace::: it was in " + this.emptySpace.indexOf(redPlayerThreePosition));
+            this.emptySpace.remove(exists);
+        }
+
+         */
+
+    }
+
+    public void blueShoots(){
+        this.playShootingSound();
+        double rotation = this.bluePlayer.getRotate();
+        if (rotation == 90.0) {
+            // shoot right
+
+            // first check if there is any reds in the line of sight,
+            // then, we can check if there is a wall
+            HashMap<ImageView, Integer> inlineTargets = new HashMap<>();
+
+            if (this.red_player_one_row == this.player_current_pos_row) {
+                if (this.red_player_one_col >= this.player_current_pos_column) {
+                    inlineTargets.put(this.redPlayer1, this.red_player_one_col);
+                }
+            }
+            if (this.red_player_two_row == this.player_current_pos_row) {
+                if (this.red_player_two_col >= this.player_current_pos_column) {
+                    inlineTargets.put(this.redPlayer2, this.red_player_two_col);
+                }
+            }
+            if (this.red_player_three_row == this.player_current_pos_row) {
+                if (this.red_player_three_col >= this.player_current_pos_column) {
+                    inlineTargets.put(this.redPlayer3, this.red_player_three_col);
+                }
+            }
+
+            ImageView nearestTarget = null;
+            Integer nearestTargetColumn = null;
+
+            if (inlineTargets.size() >= 1) {
+
+                for (Map.Entry<ImageView, Integer> entry : inlineTargets.entrySet()) {
+                    ImageView target = entry.getKey();
+                    Integer targetColumn = entry.getValue();
+
+                    if (nearestTarget == null) {
+                        nearestTarget = target;
+                        nearestTargetColumn = targetColumn;
+
+                    } else {
+                        if (targetColumn < nearestTargetColumn) {
+                            nearestTargetColumn = targetColumn;
+                            nearestTarget = target;
+                        }
+                    }
+                }
+            }
+
+            killRed(nearestTarget);
+
+
+        } else if (rotation == 180.0) {
+            // shoot bellow
+            if (this.red_player_one_col == this.player_current_pos_column) {
+
+            }
+            if (this.red_player_two_col == this.player_current_pos_column) {
+
+            }
+            if (this.red_player_three_col == this.player_current_pos_column) {
+
+            }
+
+        } else if (rotation == 270.0) {
+            // shoot left
+            if (this.red_player_one_row == this.player_current_pos_row) {
+
+            }
+            if (this.red_player_two_row == this.player_current_pos_row) {
+
+            }
+            if (this.red_player_three_row == this.player_current_pos_row) {
+
+            }
+        } else if (rotation == 0.0) {
+            // shout up
+            if (this.red_player_one_col == this.player_current_pos_column) {
+
+            }
+            if (this.red_player_two_col == this.player_current_pos_column) {
+
+            }
+            if (this.red_player_three_col == this.player_current_pos_column) {
+
+            }
+
+        }
+    }
+
+    public void killRed(ImageView redPlayerToKill) {
+        if (redPlayerToKill.equals(this.redPlayer1)) {
+            FadeTransition ft = new FadeTransition(Duration.millis(1000), this.redPlayer1);
+            ft.setFromValue(1.0);
+            ft.setToValue(0.1);
+            //ft.setCycleCount(Timeline.INDEFINITE);
+            ft.setAutoReverse(true);
+            ft.play();
+        } else if (redPlayerToKill.equals(this.redPlayer2)) {
+            FadeTransition ft = new FadeTransition(Duration.millis(1000), this.redPlayer2);
+            ft.setFromValue(1.0);
+            ft.setToValue(0.1);
+            //ft.setCycleCount(Timeline.INDEFINITE);
+            ft.setAutoReverse(true);
+            ft.play();
+        } else if (redPlayerToKill.equals(this.redPlayer3)) {
+            FadeTransition ft = new FadeTransition(Duration.millis(1000), this.redPlayer3);
+            ft.setFromValue(1.0);
+            ft.setToValue(0.1);
+            //ft.setCycleCount(Timeline.INDEFINITE);
+            ft.setAutoReverse(true);
+            ft.play();
+        }
+    }
+
+    public void playShootingSound() {
+        Media hit = new Media(new File("src/sample/blueshoot.wav").toURI().toString());
         MediaPlayer player = new MediaPlayer(hit);
         player.play();
     }
