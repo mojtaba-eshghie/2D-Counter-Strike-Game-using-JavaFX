@@ -54,6 +54,7 @@ public class Main extends Application {
     public ImageView redPlayer3;
 
 
+
     public void setEmptySpace() {
         for (int row = 1; row < 8; row++) {
 
@@ -573,9 +574,36 @@ public class Main extends Application {
                         }
                     }
                 }
+
+                // First check if there is any walls then do this: killRed(nearestTarget);
+
+                Integer rowToWorkWith = 0;
+                if (nearestTarget.equals(this.redPlayer1)) {
+                    rowToWorkWith = this.red_player_one_row;
+                } else if (nearestTarget.equals(this.redPlayer2)) {
+                    rowToWorkWith = this.red_player_two_row;
+                } else if (nearestTarget.equals(this.redPlayer3)) {
+                    rowToWorkWith = this.red_player_three_row;
+                }
+
+                // check the this.chosen with the following numbers:
+                // There must not be any walls in between these two (exclusive of the boundries themselves)
+                Boolean thereIsWallInBetween = false;
+                int lower_bound = this.player_current_pos_row * 19 + this.player_current_pos_column;
+                int upper_bound = this.player_current_pos_row * 19 + nearestTargetColumn;
+                for (int i = 0; i < this.chosen.length; i++) {
+                    if ((this.chosen[i] > lower_bound) && (this.chosen[i] < upper_bound)) {
+                        thereIsWallInBetween = true;
+                    }
+                }
+                if (!thereIsWallInBetween) {
+                    hitRed(nearestTarget);
+                }
+
             }
 
-            killRed(nearestTarget);
+
+
 
 
         } else if (rotation == 180.0) {
@@ -616,28 +644,45 @@ public class Main extends Application {
         }
     }
 
-    public void killRed(ImageView redPlayerToKill) {
+    public void updateLivesLabels() {
+        /**
+         * To be implemented:
+         * update the live labels on all of the players alltogether!
+         */
+    }
+
+    public void killRed(ImageView playerToKill) {
+        // This is temporary, I should implement actuall killing code!
+        FadeTransition ft = new FadeTransition(Duration.millis(1000), playerToKill);
+        ft.setFromValue(1.0);
+        ft.setToValue(0.0);
+        //ft.setCycleCount(Timeline.INDEFINITE);
+        ft.setAutoReverse(true);
+        ft.play();
+    }
+
+    public void hitRed(ImageView redPlayerToKill) {
         if (redPlayerToKill.equals(this.redPlayer1)) {
-            FadeTransition ft = new FadeTransition(Duration.millis(1000), this.redPlayer1);
-            ft.setFromValue(1.0);
-            ft.setToValue(0.1);
-            //ft.setCycleCount(Timeline.INDEFINITE);
-            ft.setAutoReverse(true);
-            ft.play();
+            if (this.red_player_one_lives <= 0) {
+                killRed(redPlayerToKill);
+            } else {
+                this.red_player_one_lives = this.red_player_one_lives - 1;
+                this.updateLivesLabels();
+            }
         } else if (redPlayerToKill.equals(this.redPlayer2)) {
-            FadeTransition ft = new FadeTransition(Duration.millis(1000), this.redPlayer2);
-            ft.setFromValue(1.0);
-            ft.setToValue(0.1);
-            //ft.setCycleCount(Timeline.INDEFINITE);
-            ft.setAutoReverse(true);
-            ft.play();
+            if (this.red_player_two_lives <= 0) {
+                killRed(redPlayerToKill);
+            } else {
+                this.red_player_two_lives = this.red_player_two_lives - 1;
+                this.updateLivesLabels();
+            }
         } else if (redPlayerToKill.equals(this.redPlayer3)) {
-            FadeTransition ft = new FadeTransition(Duration.millis(1000), this.redPlayer3);
-            ft.setFromValue(1.0);
-            ft.setToValue(0.1);
-            //ft.setCycleCount(Timeline.INDEFINITE);
-            ft.setAutoReverse(true);
-            ft.play();
+            if (this.red_player_three_lives <= 0) {
+                killRed(redPlayerToKill);
+            } else {
+                this.red_player_three_lives = this.red_player_three_lives - 1;
+                this.updateLivesLabels();
+            }
         }
     }
 
