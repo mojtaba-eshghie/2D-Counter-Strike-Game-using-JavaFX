@@ -53,6 +53,7 @@ public class Main extends Application {
     public ImageView redPlayer2;
     public ImageView redPlayer3;
 
+    public GridPane gridPane;
 
 
     public void setEmptySpace() {
@@ -67,9 +68,7 @@ public class Main extends Application {
                 }
             }
         }
-        System.out.println("********");
-        System.out.println(this.emptySpace);
-        System.out.println("********");
+
     }
 
     @Override
@@ -90,9 +89,11 @@ public class Main extends Application {
 
 
 
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        GridPane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Hello World");
 
+
+        this.gridPane = root;
 
         // This is how we address a controller from the fxml file that it was defined in it
         //Rectangle rec00 = (Rectangle) root.lookup("#rec5_8");
@@ -107,8 +108,7 @@ public class Main extends Application {
 
         for (int row = 0; row < 9; row++){
             for (int col = 0; col < 19; col++) {
-                System.out.println("=====================");
-                System.out.println("row: " + Integer.toString(row) + ", col: " + Integer.toString(col));
+
                 rectangles[row][col] = (Rectangle) root.lookup("#rec" + Integer.toString(row) + "_" + Integer.toString(col));
             }
         }
@@ -139,7 +139,7 @@ public class Main extends Application {
         //int delayIndex = rnd.nextInt(19);
 
         walls = chooseWalls(rectangles);
-        System.out.println(Arrays.toString(walls.toArray()));
+
 
         for (Rectangle wall : walls) {
             wall.setFill(Color.BLACK);
@@ -161,6 +161,7 @@ public class Main extends Application {
             }
 
         });
+
 
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -192,7 +193,7 @@ public class Main extends Application {
         chosen[0] = 21; chosen[1] = 40; chosen[2] = 59; chosen[3] = 42; chosen[4] = 61; chosen[5] = 80; chosen[6] = 82; chosen[7] = 101; chosen[8] = 120; chosen[9] = 93; chosen[10] = 92; chosen[11] = 73; chosen[12] = 54; chosen[13] = 47; chosen[14] = 66; chosen[15] = 68; chosen[16] = 87; chosen[17] = 67; chosen[18] = 129; chosen[19] = 148; chosen[18] = 124; chosen[19] = 131; chosen[20] = 145; chosen[21] = 117;
 
         this.chosen = chosen;
-        System.out.println(Arrays.toString(this.chosen));
+
 
         setEmptySpace();
 
@@ -223,7 +224,7 @@ public class Main extends Application {
                 not_chosen.add(index);
             }
         }
-        System.out.println(not_chosen);
+
 
         ArrayList<Integer> finalChosen = new ArrayList<>();
         // Now, let's detect the surrounded spaces
@@ -355,9 +356,7 @@ public class Main extends Application {
             }
         }
 
-        System.out.println("-----------------------------------------");
-        System.out.println(choosen_arraylist);
-        System.out.println("-----------------------------------------");
+
 
 
 
@@ -380,11 +379,7 @@ public class Main extends Application {
     public void step(KeyEvent event) {
         Integer playerPositionIndex = (19 * this.player_current_pos_row) + this.player_current_pos_column + 1;
 
-        System.out.println("*************************************************************************");
-        System.out.println("emptySpace: ");
-        System.out.println(this.emptySpace);
-        System.out.println(Arrays.toString(this.chosen));
-        System.out.println(playerPositionIndex);
+
 
 
         if (event.getCode() == KeyCode.RIGHT) {
@@ -394,7 +389,7 @@ public class Main extends Application {
 
 
 
-            System.out.println(this.bluePlayer.rotateProperty().floatValue());
+
 
             System.out.println(event.getCode());
             if (emptySpace.contains(playerPositionIndex + 1)) {
@@ -608,15 +603,85 @@ public class Main extends Application {
 
         } else if (rotation == 180.0) {
             // shoot bellow
-            if (this.red_player_one_col == this.player_current_pos_column) {
+            HashMap<ImageView, Integer> inlineTargets = new HashMap<>();
 
+            if (this.red_player_one_col == this.player_current_pos_column) {
+                if (this.red_player_one_row >= this.player_current_pos_row) {
+                    inlineTargets.put(this.redPlayer1, this.red_player_one_row);
+                }
             }
             if (this.red_player_two_col == this.player_current_pos_column) {
-
+                if (this.red_player_two_row >= this.player_current_pos_row) {
+                    inlineTargets.put(this.redPlayer2, this.red_player_two_row);
+                }
             }
             if (this.red_player_three_col == this.player_current_pos_column) {
+                if (this.red_player_three_row >= this.player_current_pos_row) {
+                    inlineTargets.put(this.redPlayer3, this.red_player_three_row);
+                }
+            }
+
+
+            ImageView nearestTarget = null;
+            Integer nearestTargetRow = null;
+
+            if (inlineTargets.size() >= 1) {
+
+                for (Map.Entry<ImageView, Integer> entry : inlineTargets.entrySet()) {
+                    ImageView target = entry.getKey();
+                    Integer targetRow = entry.getValue();
+
+                    if (nearestTarget == null) {
+                        nearestTarget = target;
+                        nearestTargetRow = targetRow;
+
+                    } else {
+                        if (targetRow < nearestTargetRow) {
+                            nearestTargetRow = targetRow;
+                            nearestTarget = target;
+                        }
+                    }
+                }
+
+                // First check if there is any walls then do this: killRed(nearestTarget);
+
+                Integer colToWorkWith = 0;
+                if (nearestTarget.equals(this.redPlayer1)) {
+                    colToWorkWith = this.red_player_one_row;
+                } else if (nearestTarget.equals(this.redPlayer2)) {
+                    colToWorkWith = this.red_player_two_row;
+                } else if (nearestTarget.equals(this.redPlayer3)) {
+                    colToWorkWith = this.red_player_three_row;
+                }
+
+                // check the this.chosen with the following numbers:
+                // There must not be any walls in between these two (exclusive of the boundries themselves)
+                Boolean thereIsWallInBetween = false;
+                int lower_bound = this.player_current_pos_row;
+                int upper_bound = nearestTargetRow;
+
+                for (int i = 0; i < this.chosen.length; i++) {
+                    /*
+                    if ((this.chosen[i] > lower_bound) && (this.chosen[i] < upper_bound)) {
+                        thereIsWallInBetween = true;
+                    }
+                     */
+                    int item = this.chosen[i];
+                    int itemRow = item / 19;
+                    int itemCol = item - (itemRow * 19) - 1;
+
+                    if ((itemRow > lower_bound) && (itemRow < upper_bound)) {
+                        thereIsWallInBetween = true;
+                    }
+
+                }
+                if (!thereIsWallInBetween) {
+                    hitRed(nearestTarget);
+                }
 
             }
+
+
 
         } else if (rotation == 270.0) {
             // shoot left
@@ -631,15 +696,86 @@ public class Main extends Application {
             }
         } else if (rotation == 0.0) {
             // shout up
-            if (this.red_player_one_col == this.player_current_pos_column) {
 
+            HashMap<ImageView, Integer> inlineTargets = new HashMap<>();
+
+            if (this.red_player_one_col == this.player_current_pos_column) {
+                if (this.red_player_one_row <= this.player_current_pos_row) {
+                    inlineTargets.put(this.redPlayer1, this.red_player_one_row);
+                }
             }
             if (this.red_player_two_col == this.player_current_pos_column) {
-
+                if (this.red_player_two_row <= this.player_current_pos_row) {
+                    inlineTargets.put(this.redPlayer2, this.red_player_two_row);
+                }
             }
             if (this.red_player_three_col == this.player_current_pos_column) {
+                if (this.red_player_three_row <= this.player_current_pos_row) {
+                    inlineTargets.put(this.redPlayer3, this.red_player_three_row);
+                }
+            }
+
+
+            ImageView nearestTarget = null;
+            Integer nearestTargetRow = null;
+
+            if (inlineTargets.size() >= 1) {
+
+                for (Map.Entry<ImageView, Integer> entry : inlineTargets.entrySet()) {
+                    ImageView target = entry.getKey();
+                    Integer targetRow = entry.getValue();
+
+                    if (nearestTarget == null) {
+                        nearestTarget = target;
+                        nearestTargetRow = targetRow;
+
+                    } else {
+                        if (targetRow > nearestTargetRow) {
+                            nearestTargetRow = targetRow;
+                            nearestTarget = target;
+                        }
+                    }
+                }
+
+                // First check if there is any walls then do this: killRed(nearestTarget);
+
+                Integer colToWorkWith = 0;
+                if (nearestTarget.equals(this.redPlayer1)) {
+                    colToWorkWith = this.red_player_one_row;
+                } else if (nearestTarget.equals(this.redPlayer2)) {
+                    colToWorkWith = this.red_player_two_row;
+                } else if (nearestTarget.equals(this.redPlayer3)) {
+                    colToWorkWith = this.red_player_three_row;
+                }
+
+                // check the this.chosen with the following numbers:
+                // There must not be any walls in between these two (exclusive of the boundries themselves)
+                Boolean thereIsWallInBetween = false;
+                int lower_bound = this.player_current_pos_row;
+                int upper_bound = nearestTargetRow;
+
+                for (int i = 0; i < this.chosen.length; i++) {
+                    /*
+                    if ((this.chosen[i] > lower_bound) && (this.chosen[i] < upper_bound)) {
+                        thereIsWallInBetween = true;
+                    }
+                     */
+                    int item = this.chosen[i];
+                    int itemRow = item / 19;
+                    int itemCol = item - (itemRow * 19) - 1;
+
+                    if ((itemRow > lower_bound) && (itemRow < upper_bound)) {
+                        thereIsWallInBetween = true;
+                    }
+
+                }
+                if (!thereIsWallInBetween) {
+                    hitRed(nearestTarget);
+                }
 
             }
+
+
 
         }
     }
@@ -652,13 +788,30 @@ public class Main extends Application {
     }
 
     public void killRed(ImageView playerToKill) {
-        // This is temporary, I should implement actuall killing code!
-        FadeTransition ft = new FadeTransition(Duration.millis(1000), playerToKill);
+        FadeTransition ft = new FadeTransition(Duration.millis(100), playerToKill);
         ft.setFromValue(1.0);
         ft.setToValue(0.0);
         //ft.setCycleCount(Timeline.INDEFINITE);
         ft.setAutoReverse(true);
         ft.play();
+        System.out.println("Killing ::: " + playerToKill.toString());
+        this.gridPane.getChildren().remove(playerToKill);
+        if (playerToKill.equals(this.redPlayer1)) {
+            this.red_player_one_col = 0;
+            this.red_player_one_row = 0;
+        } else if (playerToKill.equals(this.redPlayer2)) {
+            this.red_player_two_col = 0;
+            this.red_player_two_row = 0;
+        } else if (playerToKill.equals(this.redPlayer3)) {
+            this.red_player_three_col = 0;
+            this.red_player_three_row = 0;
+        }
+
+        // This is temporary, I should implement actual killing code!
+
+
+
+
     }
 
     public void hitRed(ImageView redPlayerToKill) {
