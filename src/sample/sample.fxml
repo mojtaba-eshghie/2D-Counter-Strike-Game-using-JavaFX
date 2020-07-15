@@ -9,6 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
 <GridPane fx:controller="sample.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="5" vgap="5" fx:id="grdpn">
 
@@ -214,6 +215,24 @@
     <ImageView GridPane.rowIndex="2" GridPane.columnIndex="17" fx:id="redPlayer3">
         <Image url="@/sample/red-tri-3.png"/>
     </ImageView>
+
+    <HBox GridPane.columnIndex="0" GridPane.rowIndex="9" GridPane.hgrow="ALWAYS" GridPane.halignment="CENTER" GridPane.columnSpan="19" >
+        <Label text="Red 1 Lives: " style="-fx-font-weight: bold;-fx-font-size: 18;" textFill="crimson"/>
+        <Label text="" fx:id="rp1lives" style="-fx-font-weight: bold;-fx-font-size: 18;" textFill="crimson"/>
+
+        <Label text="Red 2 Lives: "  style="-fx-font-weight: bold;-fx-font-size: 18; -fx-padding: 0 0 0 40;" textFill="crimson"/>
+        <Label text="" fx:id="rp2lives" style="-fx-font-weight: bold;-fx-font-size: 18;" textFill="crimson"/>
+
+        <Label text="Red 3 Lives: " style="-fx-font-weight: bold;-fx-font-size: 18; -fx-padding: 0 0 0 40;" textFill="crimson"/>
+        <Label text="" fx:id="rp3lives" style="-fx-font-weight: bold;-fx-font-size: 18;" textFill="crimson"/>
+
+        <Label text="Blue Lives: " style="-fx-font-weight: bold;-fx-font-size: 18; -fx-padding: 0 0 0 40;" textFill="blue"/>
+        <Label text="" fx:id="bplives" style="-fx-font-weight: bold;-fx-font-size: 18;" textFill="blue"/>
+
+        <Label text="" style="-fx-font-weight: bold;-fx-font-size: 18;" textFill="green"/>
+        <Label text="" fx:id="whoWon" style="-fx-font-weight: bold;-fx-font-size: 18; -fx-padding: 0 0 0 40;" textFill="green"/>
+
+    </HBox>
 
 
 

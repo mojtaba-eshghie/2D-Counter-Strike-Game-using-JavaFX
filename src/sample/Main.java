@@ -3,6 +3,7 @@ package sample;
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
@@ -70,6 +71,12 @@ public class Main extends Application{
     public ImageView redPlayer1;
     public ImageView redPlayer2;
     public ImageView redPlayer3;
+
+    public Label red1Label;
+    public Label red2Label;
+    public Label red3Label;
+    public Label blueLabel;
+    public Label whoWon;
 
     public GridPane gridPane;
 
@@ -144,6 +151,17 @@ public class Main extends Application{
 
         this.bluePlayer = (ImageView) root.lookup("#blueplayer");
 
+        this.whoWon = (Label) root.lookup("#whoWon");
+        this.red1Label = (Label) root.lookup("#rp1lives");
+        this.red2Label = (Label) root.lookup("#rp2lives");
+        this.red3Label = (Label) root.lookup("#rp3lives");
+        this.blueLabel = (Label) root.lookup("#bplives");
+
+        this.whoWon.setText("Nobody wins yet");
+        this.red1Label.setText(Integer.toString(this.red_player_one_lives));
+        this.red2Label.setText(Integer.toString(this.red_player_two_lives));
+        this.red3Label.setText(Integer.toString(this.red_player_three_lives));
+        this.blueLabel.setText(Integer.toString(this.blue_player_lives));
 
         // Now, this is how to address the controller:
         // rectangles[8][18].setFill(Color.BLACK);
@@ -179,7 +197,7 @@ public class Main extends Application{
         this.player_current_pos_column = 4;
         this.player_current_pos_row = 4;
 
-        Scene scene = new Scene(root, 860, 420);
+        Scene scene = new Scene(root, 860, 440);
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             // This will get the code for key pressed event.
@@ -349,13 +367,83 @@ public class Main extends Application{
             }
         }
 
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                Label red1Label;
+                Label red2Label;
+                Label red3Label;
+                Label blueLabel;
+                Label whoWon;
+
+                whoWon = (Label) gridPane.lookup("#whoWon");
+                red1Label = (Label) gridPane.lookup("#rp1lives");
+                red2Label = (Label) gridPane.lookup("#rp2lives");
+                red3Label = (Label) gridPane.lookup("#rp3lives");
+                blueLabel = (Label) gridPane.lookup("#bplives");
+
+                whoWon.setText("Nobody wins yet");
+                red1Label.setText(Integer.toString(red_player_one_lives));
+                red2Label.setText(Integer.toString(red_player_two_lives));
+                red3Label.setText(Integer.toString(red_player_three_lives));
+                blueLabel.setText(Integer.toString(blue_player_lives));
+            }
+        });
 
         if ((this.red_player_one_lives <= 0) && (this.red_player_two_lives <= 0) && (this.red_player_three_lives <= 0) && (this.blue_player_lives >= 1)) {
 
+
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Label red1Label;
+                    Label red2Label;
+                    Label red3Label;
+                    Label blueLabel;
+                    Label whoWon;
+
+                    whoWon = (Label) gridPane.lookup("#whoWon");
+                    red1Label = (Label) gridPane.lookup("#rp1lives");
+                    red2Label = (Label) gridPane.lookup("#rp2lives");
+                    red3Label = (Label) gridPane.lookup("#rp3lives");
+                    blueLabel = (Label) gridPane.lookup("#bplives");
+
+                    whoWon.setText("You (blue) Won!!!");
+                    red1Label.setText(Integer.toString(red_player_one_lives));
+                    red2Label.setText(Integer.toString(red_player_two_lives));
+                    red3Label.setText(Integer.toString(red_player_three_lives));
+                    blueLabel.setText(Integer.toString(blue_player_lives));
+
+
+                }
+            });
             System.out.println("***********************************************\n************************   WON   ********************\n***********************************************\n");
 
         } else if (this.blue_player_lives <= 0){
+            Platform.runLater(new Runnable() {
+                @Override
+                public void run() {
+                    Label red1Label;
+                    Label red2Label;
+                    Label red3Label;
+                    Label blueLabel;
+                    Label whoWon;
 
+                    whoWon = (Label) gridPane.lookup("#whoWon");
+                    red1Label = (Label) gridPane.lookup("#rp1lives");
+                    red2Label = (Label) gridPane.lookup("#rp2lives");
+                    red3Label = (Label) gridPane.lookup("#rp3lives");
+                    blueLabel = (Label) gridPane.lookup("#bplives");
+
+                    whoWon.setText("You lost....");
+                    red1Label.setText(Integer.toString(red_player_one_lives));
+                    red2Label.setText(Integer.toString(red_player_two_lives));
+                    red3Label.setText(Integer.toString(red_player_three_lives));
+                    blueLabel.setText(Integer.toString(blue_player_lives));
+
+
+                }
+            });
             System.out.println("***********************************************\n************************   LOST   ********************\n***********************************************\n");
 
         }
@@ -1095,10 +1183,10 @@ public class Main extends Application{
     }
 
     public void updateLivesLabels() {
-        /**
-         * To be implemented:
-         * update the live labels on all of the players alltogether!
-         */
+        this.blueLabel.setText(Integer.toString(this.blue_player_lives));
+        this.red1Label.setText(Integer.toString(this.red_player_one_lives));
+        this.red2Label.setText(Integer.toString(this.red_player_two_lives));
+        this.red3Label.setText(Integer.toString(this.red_player_three_lives));
     }
 
     public void killRed(ImageView playerToKill) {
@@ -1134,6 +1222,7 @@ public class Main extends Application{
         if (redPlayerToKill.equals(this.redPlayer1)) {
             if (this.red_player_one_lives <= 0) {
                 killRed(redPlayerToKill);
+
             } else {
                 this.red_player_one_lives = this.red_player_one_lives - 1;
                 this.updateLivesLabels();
@@ -1241,6 +1330,8 @@ public class Main extends Application{
                 }
             }
         }
+
+
     }
 
     public void playShootingSound() {
