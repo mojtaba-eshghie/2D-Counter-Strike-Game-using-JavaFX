@@ -3,7 +3,12 @@ package sample;
 import javafx.animation.FadeTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,11 +19,19 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -61,6 +74,7 @@ public class Main extends Application{
     public GridPane gridPane;
 
     public ArrayList<ImageView> aliveReds;
+    Stage primaryStage;
 
 
 
@@ -100,8 +114,8 @@ public class Main extends Application{
 
 
         GridPane root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-
+        primaryStage.setTitle("2D Counter Strike!");
+        this.primaryStage = primaryStage;
 
         this.gridPane = root;
 
@@ -181,40 +195,17 @@ public class Main extends Application{
         primaryStage.setScene(scene);
         primaryStage.show();
 
-
-        /*
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
-        scheduler.scheduleAtFixedRate(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        }, 1, 1L , SECONDS);
-         */
-        /*
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                // task to run goes here
-                System.out.println("Hello !!!");
-            }
-        };
-        Timer timer = new Timer();
-        long delay = 0;
-        long intevalPeriod = 1 * 1000;
-        // schedules the task to be run in an interval
-        timer.scheduleAtFixedRate(task, delay, intevalPeriod);
-         */
-
+        // for red players' maneuverability:
         long delay = 1L;
         ScheduledExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(1);
         scheduledThreadPool.scheduleAtFixedRate(() -> this.stepForward(), 0, delay, TimeUnit.SECONDS);
+
 
     }
 
     public void stepForward(){
         for (ImageView redPlayer : this.aliveReds) {
+            this.redShoots(redPlayer);
             if (redPlayer.equals(this.redPlayer1)) {
                 // These are the neighbors:
                 int up_row = this.red_player_one_row - 1;
@@ -357,6 +348,19 @@ public class Main extends Application{
 
             }
         }
+
+
+        if ((this.red_player_one_lives <= 0) && (this.red_player_two_lives <= 0) && (this.red_player_three_lives <= 0) && (this.blue_player_lives >= 1)) {
+
+            System.out.println("***********************************************\n************************   WON   ********************\n***********************************************\n");
+
+        } else if (this.blue_player_lives <= 0){
+
+            System.out.println("***********************************************\n************************   LOST   ********************\n***********************************************\n");
+
+        }
+
+
     }
 
     public void changeRedFaceDirection(ImageView redPlayer, String direction) {
@@ -1151,6 +1155,94 @@ public class Main extends Application{
         }
     }
 
+    public void redShoots(ImageView redPlayer) {
+        Double faceAngel = redPlayer.getRotate();
+        if (faceAngel.equals(0.0)) {
+            // Shoot up
+
+            /**
+             * Red can only shoot if it is in the same column with bluePlayer and bluePlayer's row number is lower than
+             * him.
+             */
+            if (redPlayer.equals(this.redPlayer1)) {
+                if ((this.player_current_pos_column == this.red_player_one_col) && (this.player_current_pos_row <= this.red_player_one_row)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            } else if (redPlayer.equals(this.redPlayer2)) {
+                if ((this.player_current_pos_column == this.red_player_two_col) && (this.player_current_pos_row <= this.red_player_two_row)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            } else if (redPlayer.equals(this.redPlayer3)) {
+                if ((this.player_current_pos_column == this.red_player_three_col) && (this.player_current_pos_row <= this.red_player_three_row)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            }
+
+        } else if (faceAngel.equals(90.0)) {
+            // Shoot right
+
+            if (redPlayer.equals(this.redPlayer1)) {
+                if ((this.player_current_pos_row == this.red_player_one_row) && (this.player_current_pos_column >= this.red_player_one_col)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            } else if (redPlayer.equals(this.redPlayer2)) {
+                if ((this.player_current_pos_row == this.red_player_two_row) && (this.player_current_pos_column >= this.red_player_two_col)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            } else if (redPlayer.equals(this.redPlayer3)) {
+                if ((this.player_current_pos_row == this.red_player_three_row) && (this.player_current_pos_column >= this.red_player_three_col)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            }
+        } else if (faceAngel.equals(180.0)) {
+            // Shoot bellow
+
+            if (redPlayer.equals(this.redPlayer1)) {
+                if ((this.player_current_pos_column == this.red_player_one_col) && (this.player_current_pos_row >= this.red_player_one_row)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            } else if (redPlayer.equals(this.redPlayer2)) {
+                if ((this.player_current_pos_column == this.red_player_two_col) && (this.player_current_pos_row >= this.red_player_two_row)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            } else if (redPlayer.equals(this.redPlayer3)) {
+                if ((this.player_current_pos_column == this.red_player_three_col) && (this.player_current_pos_row >= this.red_player_three_row)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            }
+
+        } else if (faceAngel.equals(270.0)) {
+            // Shoot left
+
+
+            if (redPlayer.equals(this.redPlayer1)) {
+                if ((this.player_current_pos_row == this.red_player_one_row) && (this.player_current_pos_column <= this.red_player_one_col)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            } else if (redPlayer.equals(this.redPlayer2)) {
+                if ((this.player_current_pos_row == this.red_player_two_row) && (this.player_current_pos_column <= this.red_player_two_col)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            } else if (redPlayer.equals(this.redPlayer3)) {
+                if ((this.player_current_pos_row == this.red_player_three_row) && (this.player_current_pos_column <= this.red_player_three_col)) {
+                    this.playShootingSound();
+                    this.blue_player_lives--;
+                }
+            }
+        }
+    }
+
     public void playShootingSound() {
         Media hit = new Media(new File("src/sample/blueshoot.wav").toURI().toString());
         MediaPlayer player = new MediaPlayer(hit);
@@ -1160,5 +1252,7 @@ public class Main extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+
+
 
 }
