@@ -1,1 +1,1 @@
-## Still under development.
+## 2D Counter-Strike Game by @mojtaba-eshghie
